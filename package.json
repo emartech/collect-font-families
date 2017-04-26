@@ -1,0 +1,20 @@
+{
+  "name": "fontfinder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-watch": "tape-watch **/*.spec.js",
+    "test": "tape **/*.spec.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tape": "^4.6.3",
+    "tape-watch": "^2.3.0"
+  },
+  "dependencies": {
+    "flatten": "^1.0.2",
+    "ramda": "^0.23.0"
+  }
+}
