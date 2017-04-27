@@ -1,5 +1,5 @@
 const test = require('tape');
-const fontFinder = require('./');
+const fontFinder = require('./googleFontLinkCollector');
 
 test('should give back empty array if there is no custom font in the given email', (t) => {
   const html = `
