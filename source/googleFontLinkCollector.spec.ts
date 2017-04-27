@@ -1,7 +1,7 @@
-const test = require('tape');
-const fontFinder = require('./googleFontLinkCollector');
+import * as test from 'tape';
+import { fontFinder } from './googleFontLinkCollector';
 
-test('should give back empty array if there is no custom font in the given email', (t) => {
+test('should give back empty array if there is no custom font in the given email', (t: test.Test) => {
   const html = `
     <html>
       <body>
@@ -13,7 +13,7 @@ test('should give back empty array if there is no custom font in the given email
   t.end();
 });
 
-test('should find the given font family', (t) => {
+test('should find the given font family', (t: test.Test) => {
   const html = `
     <html>
       <head>
@@ -28,7 +28,7 @@ test('should find the given font family', (t) => {
   t.end();
 });
 
-test('should not find non custom font css link', (t) => {
+test('should not find non custom font css link', (t: test.Test) => {
   const html = `
     <html>
       <head>
@@ -43,9 +43,7 @@ test('should not find non custom font css link', (t) => {
   t.end();
 });
 
-
-
-test('should give back the custom font name', (t) => {
+test('should give back the custom font name', (t: test.Test) => {
   const html = `
     <html>
       <head>
@@ -60,7 +58,7 @@ test('should give back the custom font name', (t) => {
   t.end();
 });
 
-test('should give back the custom font name when size and language options are added', (t) => {
+test('should give back the custom font name when size and language options are added', (t: test.Test) => {
   const html = `
     <html>
       <head>
@@ -75,7 +73,7 @@ test('should give back the custom font name when size and language options are a
   t.end();
 });
 
-test('should find font family if only language options are given', (t) => {
+test('should find font family if only language options are given', (t: test.Test) => {
   const html = `
     <html>
       <head>
@@ -90,7 +88,7 @@ test('should find font family if only language options are given', (t) => {
   t.end();
 });
 
- test('should work for more than one font family link', (t) => {
+ test('should work for more than one font family link', (t: test.Test) => {
   const html = `
     <html>
       <head>

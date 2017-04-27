@@ -4,17 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-watch": "tape-watch **/*.spec.js",
-    "test": "tape **/*.spec.js"
+    "test-watch": "ts-node node_modules/tape-watch/bin/tape-watch source/**/*.spec.ts | tap-dot",
+    "test": "ts-node node_modules/tape/bin/tape source/**/*.spec.ts | tap-dot"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "tape": "^4.6.3",
-    "tape-watch": "^2.3.0"
+    "@types/cheerio": "0.17.31",
+    "@types/node": "6.0.45",
+    "@types/ramda": "0.0.3",
+    "@types/tape": "4.2.29",
+    "tap-dot": "^1.0.5",
+    "tape": "4.6.3",
+    "tape-watch": "2.3.0",
+    "ts-node": "3.0.2",
+    "typescript": "2.3.1"
   },
   "dependencies": {
-    "cheerio": "^0.22.0",
-    "ramda": "^0.23.0"
+    "cheerio": "0.22.0",
+    "ramda": "0.23.0"
   }
 }

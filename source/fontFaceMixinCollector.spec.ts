@@ -1,12 +1,12 @@
-const test = require('tape');
-const fontFinder = require('./fontFaceMixinCollector');
+import * as test from 'tape';
+import { fontFinder } from './fontFaceMixinCollector';
 
-test('should give back empty array if the given string is empty', (t) => {
+test('should give back empty array if the given string is empty', (t: test.Test) => {
   t.deepEqual(fontFinder(''), []);
   t.end();
 });
 
-test('should not give back font family if its not in font-face mixin', (t) => {
+test('should not give back font family if its not in font-face mixin', (t: test.Test) => {
   const html = `
     <style>
       body: {
@@ -21,7 +21,7 @@ test('should not give back font family if its not in font-face mixin', (t) => {
   t.end();
 });
 
-test('should give back only font families', (t) => {
+test('should give back only font families', (t: test.Test) => {
   const html = `
     <style>
       body: {
@@ -37,7 +37,7 @@ test('should give back only font families', (t) => {
   t.end();
 });
 
-test('should ignore whitespaces, and ticks around font families', (t) => {
+test('should ignore whitespaces, and ticks around font families', (t: test.Test) => {
   const html = `
     <style>
       body: {
@@ -54,7 +54,7 @@ test('should ignore whitespaces, and ticks around font families', (t) => {
   t.end();
 });
 
-test('should collect fallback fonts', (t) => {
+test('should collect fallback fonts', (t: test.Test) => {
   const html = `
     <style>
       @font-face {
