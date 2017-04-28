@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-watch": "ts-node node_modules/tape-watch/bin/tape-watch source/**/*.spec.ts",
-    "test": "ts-node node_modules/tape/bin/tape source/**/*.spec.ts"
+    "test-watch": "ts-node node_modules/tape-watch/bin/tape-watch source/*.spec.ts source/**/*.spec.ts",
+    "test": "ts-node node_modules/tape/bin/tape source/*.spec.ts source/**/*.spec.ts"
   },
   "author": "",
   "license": "ISC",
