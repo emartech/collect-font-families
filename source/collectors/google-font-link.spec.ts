@@ -1,5 +1,5 @@
 import * as test from 'tape';
-import { fontFinder } from './googleFontLinkCollector';
+import { googleFontLinkCollector } from './';
 
 test('should give back empty array if there is no custom font in the given email', (t: test.Test) => {
   const html = `
@@ -9,7 +9,7 @@ test('should give back empty array if there is no custom font in the given email
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html), []);
+  t.deepEqual(googleFontLinkCollector(html), []);
   t.end();
 });
 
@@ -24,7 +24,7 @@ test('should find the given font family', (t: test.Test) => {
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html).length, 1);
+  t.deepEqual(googleFontLinkCollector(html).length, 1);
   t.end();
 });
 
@@ -39,7 +39,7 @@ test('should not find non custom font css link', (t: test.Test) => {
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html).length, 0);
+  t.deepEqual(googleFontLinkCollector(html).length, 0);
   t.end();
 });
 
@@ -54,7 +54,7 @@ test('should give back the custom font name', (t: test.Test) => {
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html), ['Open Sans']);
+  t.deepEqual(googleFontLinkCollector(html), ['Open Sans']);
   t.end();
 });
 
@@ -69,7 +69,7 @@ test('should give back the custom font name when size and language options are a
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html), ['Open Sans']);
+  t.deepEqual(googleFontLinkCollector(html), ['Open Sans']);
   t.end();
 });
 
@@ -84,7 +84,7 @@ test('should find font family if only language options are given', (t: test.Test
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html), ['Open Sans']);
+  t.deepEqual(googleFontLinkCollector(html), ['Open Sans']);
   t.end();
 });
 
@@ -100,6 +100,6 @@ test('should find font family if only language options are given', (t: test.Test
       </body>
     </html>
   `;
-  t.deepEqual(fontFinder(html), ['Open Sans', 'Source Sans Pro']);
+  t.deepEqual(googleFontLinkCollector(html), ['Open Sans', 'Source Sans Pro']);
   t.end();
 });
