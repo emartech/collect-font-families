@@ -1,7 +1,8 @@
 import * as test from 'tape';
-import { googleFontLinkCollector } from './';
+import { singleTest } from '../lib/test';
+import { collectFromGoogleFontLinks } from './';
 
-test('should give back empty array if there is no custom font in the given email', (t: test.Test) => {
+singleTest('should give back empty array if there is no custom font in the given email', (t: test.Test) => {
   const html = `
     <html>
       <body>
@@ -9,97 +10,58 @@ test('should give back empty array if there is no custom font in the given email
       </body>
     </html>
   `;
-  t.deepEqual(googleFontLinkCollector(html), []);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html), []);
 });
 
-test('should find the given font family', (t: test.Test) => {
+singleTest('should find the given font family from link tag', (t: test.Test) => {
   const html = `
-    <html>
-      <head>
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-      </head>
-      <body>
-        <div>Yo!</div>
-      </body>
-    </html>
+    <head>
+      <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    </head>
   `;
-  t.deepEqual(googleFontLinkCollector(html).length, 1);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html).length, 1);
 });
 
-test('should not find non custom font css link', (t: test.Test) => {
+singleTest('should not find non custom font css link', (t: test.Test) => {
   const html = `
-    <html>
-      <head>
-        <link href="http://foobar.com/css?color=red" rel="stylesheet" type="text/css">
-      </head>
-      <body>
-        <div>Yo!</div>
-      </body>
-    </html>
+    <link href="http://foobar.com/css?family=red" rel="stylesheet" type="text/css">
   `;
-  t.deepEqual(googleFontLinkCollector(html).length, 0);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html).length, 0);
 });
 
-test('should give back the custom font name', (t: test.Test) => {
+singleTest('should give back the custom font name', (t: test.Test) => {
   const html = `
-    <html>
-      <head>
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-      </head>
-      <body>
-        <div>Yo!</div>
-      </body>
-    </html>
+    <link href="http://fonts.googleapis.com/css?family=Open" rel="stylesheet" type="text/css">
   `;
-  t.deepEqual(googleFontLinkCollector(html), ['Open Sans']);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html), ['Open']);
 });
 
-test('should give back the custom font name when size and language options are added', (t: test.Test) => {
+singleTest('should give back the custom font name with normalized name', (t: test.Test) => {
   const html = `
-    <html>
-      <head>
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,700i&amp;subset=greek" rel="stylesheet">
-      </head>
-      <body>
-        <div>Yo!</div>
-      </body>
-    </html>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
   `;
-  t.deepEqual(googleFontLinkCollector(html), ['Open Sans']);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html), ['Open Sans']);
 });
 
-test('should find font family if only language options are given', (t: test.Test) => {
+singleTest('should give back the custom font name when size and language options are added', (t: test.Test) => {
   const html = `
-    <html>
-      <head>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=greek,latin-ext" rel="stylesheet">
-      </head>
-      <body>
-        <div>Yo!</div>
-      </body>
-    </html>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,700i&amp;subset=greek" rel="stylesheet">
   `;
-  t.deepEqual(googleFontLinkCollector(html), ['Open Sans']);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html), ['Open Sans']);
 });
 
- test('should work for more than one font family link', (t: test.Test) => {
+singleTest('should find font family if only language options are given', (t: test.Test) => {
   const html = `
-    <html>
-      <head>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=greek,latin-ext" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;subset=latin-ext" rel="stylesheet">
-      </head>
-      <body>
-        <div>Yo!</div>
-      </body>
-    </html>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=greek,latin-ext" rel="stylesheet">
   `;
-  t.deepEqual(googleFontLinkCollector(html), ['Open Sans', 'Source Sans Pro']);
-  t.end();
+  t.deepEqual(collectFromGoogleFontLinks(html), ['Open Sans']);
+});
+
+ singleTest('should work for more than one font family link', (t: test.Test) => {
+  const html = `
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=greek,latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;subset=latin-ext" rel="stylesheet">
+    <link href="http://foobar.com/css?family=red" rel="stylesheet" type="text/css">
+  `;
+  t.deepEqual(collectFromGoogleFontLinks(html), ['Open Sans', 'Source Sans Pro']);
 });

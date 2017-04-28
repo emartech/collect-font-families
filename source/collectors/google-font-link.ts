@@ -13,7 +13,7 @@ const getFamily = pipe(
   replace(/\+/g, ' ')
 );
 
-export const googleFontLinkCollector = pipe(
+export const collectFromGoogleFontLinks = pipe(
   getLinkNodes,
   filter(hasGoogleFontUrlInHref),
   map(path(['attribs', 'href'])),
