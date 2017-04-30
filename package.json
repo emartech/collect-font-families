@@ -1,6 +1,5 @@
 {
   "name": "@emartech/collect-font-families",
-  "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -8,7 +7,7 @@
     "test-watch": "ts-node node_modules/tape-watch/bin/tape-watch source/*.spec.ts source/**/*.spec.ts",
     "test": "ts-node node_modules/tape/bin/tape source/*.spec.ts source/**/*.spec.ts",
     "build": "rimraf dist && tsc",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "CI=true semantic-release pre && npm publish --access public && semantic-release post",
     "prepublish": "npm test && npm run build"
   },
   "config": {
@@ -29,7 +28,7 @@
   "release": {
     "analyzeCommits": "@bubltechnology/customizable-commit-analyzer",
     "verifyConditions": {
-      "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
+      "path": "./node_modules/semantic-release/src/lib/plugin-noop.js"
     }
   },
   "devDependencies": {
