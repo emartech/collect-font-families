@@ -1,14 +1,37 @@
 {
-  "name": "fontfinder",
+  "name": "@emartech/collect-font-families",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "test-watch": "ts-node node_modules/tape-watch/bin/tape-watch source/*.spec.ts source/**/*.spec.ts",
-    "test": "ts-node node_modules/tape/bin/tape source/*.spec.ts source/**/*.spec.ts"
+    "test": "ts-node node_modules/tape/bin/tape source/*.spec.ts source/**/*.spec.ts",
+    "build": "rimraf dist && tsc",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "prepublish": "npm test && npm run build"
   },
-  "author": "",
+  "config": {
+    "commitTypeMap": {
+      "chore": "patch"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emartech/font-family-collector"
+  },
+  "bugs": {
+    "url": "https://github.com/emartech/font-family-collector"
+  },
+  "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
   "license": "ISC",
+  "homepage": "https://github.com/emartech/font-family-collector",
+  "release": {
+    "analyzeCommits": "@bubltechnology/customizable-commit-analyzer",
+    "verifyConditions": {
+      "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
+    }
+  },
   "devDependencies": {
     "@types/cheerio": "0.17.31",
     "@types/node": "6.0.45",
@@ -18,7 +41,9 @@
     "tape": "4.6.3",
     "tape-watch": "2.3.0",
     "ts-node": "3.0.2",
-    "typescript": "2.3.1"
+    "typescript": "2.3.1",
+    "rimraf": "2.5.4",
+    "semantic-release": "4.3.5"
   },
   "dependencies": {
     "cheerio": "0.22.0",
