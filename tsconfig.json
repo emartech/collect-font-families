@@ -23,7 +23,7 @@
     "outDir": "./dist",
     "pretty": true,
     "removeComments": true,
-    "rootDir": "./",
+    "rootDir": "./source",
     "sourceMap": true,
     "sourceRoot": "./dist",
     "strictNullChecks": true,
