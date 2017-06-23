@@ -1,3 +1,9 @@
 node_modules/
 source/
 *.log
+.gitignore
+.npmignore
+.npmrc
+.nvmrc
+.tsconfig.json
+.tslint.json
