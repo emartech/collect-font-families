@@ -57,7 +57,7 @@ singleTest('should find font family if only language options are given', (t: tes
   t.deepEqual(collectFromGoogleFontLinks(html), ['Open Sans']);
 });
 
- singleTest('should work for more than one font family link', (t: test.Test) => {
+singleTest('should work for more than one font family link', (t: test.Test) => {
   const html = `
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=greek,latin-ext" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;subset=latin-ext" rel="stylesheet">

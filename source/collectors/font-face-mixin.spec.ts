@@ -3,7 +3,7 @@ import { singleTest } from '../lib/test';
 import { collectFromFontFaces } from './font-face-mixin';
 
 singleTest('should give back empty array if there is no font in the given input', (t: test.Test) => {
-  const html = `<div>What</div>`;
+  const html = '<div>What</div>';
   t.deepEqual(collectFromFontFaces(html), []);
 });
 
