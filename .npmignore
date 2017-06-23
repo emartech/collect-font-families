@@ -6,5 +6,6 @@ test/
 .npmignore
 .npmrc
 .nvmrc
-.tsconfig.json
-.tslint.json
+jasmine.json
+tsconfig.json
+tslint.json
