@@ -1,9 +1,10 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "no-consecutive-blank-lines": [true, 3],
+    "ordered-imports": [false],
     "quotemark": [true, "single", "avoid-escape", "avoid-template"],
-    "trailing-comma": [false],
-    "ordered-imports": [false]
+    "trailing-comma": [false]
   },
   "defaultSeverity": "error"
 }

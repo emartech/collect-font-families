@@ -4,8 +4,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "test-watch": "ts-node node_modules/tape-watch/bin/tape-watch source/*.spec.ts source/**/*.spec.ts",
-    "test": "ts-node node_modules/tape/bin/tape source/*.spec.ts source/**/*.spec.ts",
+    "test": "TS_NODE_PROJECT=./tsconfig.json JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "rm -rf dist && tsc --project ./tsconfig.json",
     "code:style": "tslint --config ./tslint.json --format stylish 'source/**/*.ts'",
     "semantic-release": "CI=true semantic-release pre && npm publish --access public && semantic-release post",
@@ -35,14 +34,16 @@
   "devDependencies": {
     "@bubltechnology/customizable-commit-analyzer": "1.0.0",
     "@types/cheerio": "0.22.1",
+    "@types/jasmine": "2.5.52",
     "@types/node": "8.0.1",
     "@types/ramda": "0.24.0",
     "@types/tape": "4.2.29",
+    "jasmine": "2.6.0",
     "semantic-release": "4.3.5",
     "tap-dot": "^1.0.5",
     "tape": "4.6.3",
     "tape-watch": "2.3.0",
-    "ts-node": "3.0.2",
+    "ts-node": "3.1.0",
     "tslint": "5.4.3",
     "typescript": "2.3.4"
   },
