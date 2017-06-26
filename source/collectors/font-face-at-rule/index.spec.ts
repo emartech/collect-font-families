@@ -77,6 +77,7 @@ describe('#collectFromFontFaces', () => {
 
   [
     {
+      name: 'Double qoutes',
       style: `
       @font-face {
         font-family: "Bitstream Vera Serif Bold";
@@ -84,6 +85,7 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
+      name: 'Single qoutes',
       style: `
       @font-face {
         font-family: 'Bitstream Vera Serif Bold';
@@ -91,44 +93,23 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
+      name: 'Backtick',
       style: `
       @font-face {
         font-family: \`Bitstream Vera Serif Bold\`;
         src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
       }`
-    },
-    {
-      style: `
-      @font-face {
-        font-family: Hoefler Text Ornaments;
-        src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
-      }`
-    },
-    {
-      style: `
-      @font-face
-      {
-        font-family:
-        Hoefler Text Ornaments;
-
-        src:
-        url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
-
-      }`
-    },
-    {
-      style: `
-      @font-face{font-family: Hoefler Text Ornaments;src: local(HoeflerText-Ornaments);}`
     }
-  ].forEach(({ style }) =>
+  ].forEach(({ style, name }) =>
 
-  xit('should get one font face object with all properties', () => {
+  it(`should get one font face object with all properties (${name})`, () => {
     expect(collectFromFontFaces(style)).toEqual(['Bitstream Vera Serif Bold']);
   }));
 
 
   [
     {
+      name: 'Without linebreaks',
       style: `
       @font-face {
         font-family: Hoefler Text Ornaments;
@@ -136,6 +117,7 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
+      name: 'With linebreaks',
       style: `
       @font-face
       {
@@ -153,7 +135,7 @@ describe('#collectFromFontFaces', () => {
     }
   ].forEach(({ style }) =>
 
-  xit('should get one font face object with all properties', () => {
+  it('should get one font face object with all properties', () => {
     expect(collectFromFontFaces(style)).toEqual(['Hoefler Text Ornaments']);
   }));
 
