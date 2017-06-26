@@ -1,2 +1,2 @@
-export * from './font-face-mixin';
+export * from './font-face-at-rule';
 export * from './google-font-link';

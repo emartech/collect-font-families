@@ -1,6 +1,6 @@
 import { collectFromGoogleFontLinks } from './';
 
-describe('#collectFontFamilies', () => {
+describe('#collectFromGoogleFontLinks', () => {
 
   it('should give back empty array if there is no custom font in the given email', () => {
     const html = `
