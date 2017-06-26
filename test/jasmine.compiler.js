@@ -1,3 +1,3 @@
 'use strict';
 
-require('ts-node/register');
+require('ts-node').register({ fast: true });
