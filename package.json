@@ -12,7 +12,8 @@
   },
   "config": {
     "commitTypeMap": {
-      "chore": "patch"
+      "chore": "patch",
+      "refactor": "patch"
     }
   },
   "repository": {
