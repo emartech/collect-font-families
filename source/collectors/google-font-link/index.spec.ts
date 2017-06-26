@@ -73,4 +73,12 @@ describe('#collectFromGoogleFontLinks', () => {
     expect(collectFromGoogleFontLinks(html)).toEqual(['Open Sans', 'Source Sans Pro']);
   });
 
+
+  it('should work for multiple font families', () => {
+    const html = `
+      <link href="https://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans" rel="stylesheet">
+    `;
+    expect(collectFromGoogleFontLinks(html)).toEqual(['Tangerine', 'Inconsolata', 'Droid Sans']);
+  });
+
 });
