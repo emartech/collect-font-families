@@ -65,38 +65,6 @@ describe('#collectFromFontFaces', () => {
   });
 
 
-  it('should ignore simple qoutes', () => {
-    const html = `
-      @font-face {
-        font-family: 'Montserrat';
-      }
-    `;
-    expect(collectFromFontFaces(html)).toEqual(['Montserrat']);
-  });
-
-
-  it('should ignore double qoutes', () => {
-    const html = `
-      @font-face {
-        font-family: "Montserrat";
-      }
-    `;
-    expect(collectFromFontFaces(html)).toEqual(['Montserrat']);
-  });
-
-
-  it('should collect every font family', () => {
-    const html = `
-      @font-face {
-        font-family: 'Montserrat';
-      }
-      @font-face {
-        font-family: 'Wharane';
-      }
-    `;
-    expect(collectFromFontFaces(html)).toEqual(['Montserrat', 'Wharane']);
-  });
-
   [
     {
       name: 'double qoutes',
