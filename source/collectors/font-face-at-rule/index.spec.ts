@@ -140,6 +140,12 @@ describe('#collectFromFontFaces', () => {
     }
 
     @font-face {
+      font-family: MainText;
+      src: url(http://example.com/font.woff);
+      font-variant: oldstyle-nums proportional-nums styleset(1,3);
+    }
+
+    @font-face {
       font-family: bodytext;
       src: url(ideal-sans-serif.woff) format("woff"),
           url(basic-sans-serif.ttf) format("opentype");
