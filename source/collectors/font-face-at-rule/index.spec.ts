@@ -2,36 +2,58 @@ import { collectFromFontFaces } from './';
 
 describe('#collectFromFontFaces', () => {
 
-  it('should give back empty array if there is no font in the given input', () => {
-    const html = '<div>What</div>';
+  it('should return empty array if undefined as html given', () => {
+    const html = undefined;
     expect(collectFromFontFaces(html)).toEqual([]);
   });
 
 
-  it('should give back font family from font-face', () => {
+  it('should return empty array if null as html given', () => {
+    const html = null;
+    expect(collectFromFontFaces(html)).toEqual([]);
+  });
+
+
+  it('should return empty array if empty string as html given', () => {
+    const html = '';
+    expect(collectFromFontFaces(html)).toEqual([]);
+  });
+
+
+  it('should return empty array if no font face in given html', () => {
+    const html = '<style>body { background: red; }</style>';
+    expect(collectFromFontFaces(html)).toEqual([]);
+  });
+
+
+  it('should return empty array if no font face mixin in given html', () => {
     const html = `
-      @font-face {
-        font-family:'Vardono';
-      }
+      <style>
+        body: {
+          font-family:Roboto;
+        }
+        h1: {
+          font-family:Verdana;
+        }
+      </style>
+    `;
+    expect(collectFromFontFaces(html)).toEqual([]);
+  });
+
+
+  it('should return font family of font face', () => {
+    const html = `
+      <style>
+        @font-face {
+          font-family:Vardono;
+        }
+      </style>
     `;
     expect(collectFromFontFaces(html)).toEqual(['Vardono']);
   });
 
 
-  it('should not give back font family if its not in font-face mixin', () => {
-    const html = `
-      body: {
-        font-family:Roboto;
-      }
-      h1: {
-        font-family:Verdana;
-      }
-    `;
-    expect(collectFromFontFaces(html)).toEqual([]);
-  });
-
-
-  it('should give back only font families', () => {
+  it('should return only font families of font face', () => {
     const html = `
       @font-face {
         font-color: red;
@@ -43,7 +65,7 @@ describe('#collectFromFontFaces', () => {
   });
 
 
-  it('should ignore whitespaces, and ticks around font families', () => {
+  it('should ignore simple qoutes', () => {
     const html = `
       @font-face {
         font-family: 'Montserrat';
@@ -53,7 +75,7 @@ describe('#collectFromFontFaces', () => {
   });
 
 
-  it('should works with mustache too', () => {
+  it('should ignore double qoutes', () => {
     const html = `
       @font-face {
         font-family: "Montserrat";
@@ -77,7 +99,7 @@ describe('#collectFromFontFaces', () => {
 
   [
     {
-      name: 'Double qoutes',
+      name: 'double qoutes',
       style: `
       @font-face {
         font-family: "Bitstream Vera Serif Bold";
@@ -85,7 +107,7 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
-      name: 'Single qoutes',
+      name: 'single qoutes',
       style: `
       @font-face {
         font-family: 'Bitstream Vera Serif Bold';
@@ -93,14 +115,14 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
-      name: 'Backtick',
+      name: 'sacktick',
       style: `
       @font-face {
         font-family: \`Bitstream Vera Serif Bold\`;
         src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
       }`
     }
-  ].forEach(({ style, name }) =>
+  ].forEach(({ name, style }) =>
 
   it(`should get one font face object with all properties (${name})`, () => {
     expect(collectFromFontFaces(style)).toEqual(['Bitstream Vera Serif Bold']);
@@ -109,7 +131,7 @@ describe('#collectFromFontFaces', () => {
 
   [
     {
-      name: 'Without linebreaks',
+      name: 'without linebreaks',
       style: `
       @font-face {
         font-family: Hoefler Text Ornaments;
@@ -117,7 +139,7 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
-      name: 'With linebreaks',
+      name: 'with linebreaks',
       style: `
       @font-face
       {
@@ -130,41 +152,18 @@ describe('#collectFromFontFaces', () => {
       }`
     },
     {
+      name: 'single-line',
       style: `
       @font-face{font-family:Hoefler Text Ornaments;src:local(HoeflerText-Ornaments);}`
     }
-  ].forEach(({ style }) =>
+  ].forEach(({ name, style }) =>
 
-  it('should get one font face object with all properties', () => {
+  it(`should get one font face object with all properties (${name})`, () => {
     expect(collectFromFontFaces(style)).toEqual(['Hoefler Text Ornaments']);
   }));
 
 
-  it('should parse src as an array of definitions', () => {
-    const style = `
-    @font-face {
-      font-family: bodytext;
-      src: url(ideal-sans-serif.woff) format("woff"),
-        url(basic-sans-serif.ttf) format("opentype");
-    }`;
-    expect(collectFromFontFaces(style)).toEqual(['bodytext']);
-  });
-
-
-  it('should parse src as an array of definitions', () => {
-    const style = `
-    @font-face {
-      font-family: bodytext;
-      src: local(Gentium Bold),
-        local(Gentium-Bold),
-        url(GentiumBold.woff);
-      font-weight: bold;
-    }`;
-    expect(collectFromFontFaces(style)).toEqual(['bodytext']);
-  });
-
-
-  it('should get all font face object as an array', () => {
+  it('should get all font families from font faces as an array', () => {
     const style = `
     @font-face {
       font-family: MainText;
