@@ -24,7 +24,7 @@
     "url": "https://github.com/emartech/font-family-collector"
   },
   "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/emartech/font-family-collector",
   "release": {
     "analyzeCommits": "@bubltechnology/customizable-commit-analyzer",
